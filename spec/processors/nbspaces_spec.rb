@@ -10,9 +10,11 @@ describe StandaloneTypograf::Nbspaces::Processor do
 
   texts = {
     :utf => [
-        ['В Украине', 'В Украине']
+        ['В Украине', 'В Украине'],
+        ['100 руб.', '100 руб.']
     ],
     :html => [
+      ['100 руб.', '100&nbsp;руб.'],
       ['Форточка в окне', 'Форточка в&nbsp;окне'],
       ['Иди по краю', 'Иди по&nbsp;краю'],
       ['Исключительно Великолепно', 'Исключительно&nbsp;Великолепно'],
@@ -21,11 +23,11 @@ describe StandaloneTypograf::Nbspaces::Processor do
     ]
   }
 
-  it 'works' do 
+  it 'works' do
     texts.each_pair do |mode, array|
-      array.each do|text_pair|  
+      array.each do |text_pair|
         typograf(text_pair[0], mode).should == text_pair[1]
       end
-    end 
+    end
   end
 end

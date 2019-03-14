@@ -14,6 +14,10 @@ module StandaloneTypograf #:nodoc:
       почти только исключительно вон вот именно точь-в-точь приблизительно прямо
     )
 
+    CURRENCIES = %w(
+      руб. р.
+    )
+
     included do
       register_processor(Processor)
     end
@@ -21,6 +25,9 @@ module StandaloneTypograf #:nodoc:
     module Processor
       def self.compile(text, mode)
         # One or three letter word - nbspace to the right
+        text.gsub!(/(\d)( )(#{CURRENCIES.join('|')})/i, '\1' + CHAR[mode] + '\3')
+
+        # price with currency - nbspace between
         text.gsub!(/(\s|^)([[:alpha:]]{1,2})(\s)/i, '\1\2'+CHAR[mode])
 
         # nbspace to the right

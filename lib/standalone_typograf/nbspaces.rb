@@ -6,7 +6,7 @@ module StandaloneTypograf #:nodoc:
 
     CHAR = {
       :html => '&nbsp;',
-      :utf  => ' ',
+      :utf  => "\u00a0",
     }.freeze
 
     PARTICLES = %w(
